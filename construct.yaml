@@ -35,6 +35,7 @@ specs:
   - gitpython >=2.1.0
   - matplotlib-base
   - numpy
+  - openssh
   - pexpect >=4.0.1
   - pillow
   - psutil >=4.2.0
