@@ -5,7 +5,7 @@
 # or -h, or without. Any of these should be working
 # otherwise we consider it an issue
 
-scriptsToTest=(mysql gfal-ls gfal-stat myproxy-info voms-proxy-init2 rrdtool);
+scriptsToTest=(mysql gfal-ls gfal-stat myproxy-info voms-proxy-init rrdtool);
 rc=0
 
 for script in "${scriptsToTest[@]}"; do
@@ -16,6 +16,7 @@ for script in "${scriptsToTest[@]}"; do
       # If it still fails, try with no options
        if ! ${script}  &>/dev/null; then
          # If it still fails, it fails...
+         echo "${script} is not working";
          rc=1;
        fi
      fi
