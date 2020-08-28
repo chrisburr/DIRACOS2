@@ -1,4 +1,4 @@
-name: Greet Everyone
+name: Build, test and deploy!
 on: [push]
 
 jobs:
@@ -14,7 +14,9 @@ jobs:
           eval "$(${HOME}/miniforge/bin/conda shell.bash hook)"
           conda install --yes constructor
       - name: Create installer
-        run: constructor . --platform=linux-64
+        run: |
+          eval "$(${HOME}/miniforge/bin/conda shell.bash hook)"
+          constructor . --platform=linux-64
       - name: Upload installer
         uses: actions/upload-artifact@v2
         with:
