@@ -24,7 +24,7 @@ jobs:
 
   basic_tests:
     name: Basic tests
-    needs: installer
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -34,4 +34,3 @@ jobs:
           name: homework
       - name: Test CentOS 7
         run: run_basic_tests.sh centos:7
-
