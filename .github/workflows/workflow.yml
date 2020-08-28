@@ -33,7 +33,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: installer
-      - name: Test CentOS 7
+      - name: Generate environment.yaml
         run: |
           bash DIRACOS-2.0a1-Linux-x86_64.sh -b -p diracos
           source diracos/diracosrc
@@ -61,5 +61,5 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: installer
-      - name: Test CentOS 7
-        run: run_basic_tests.sh ${{ matrix.docker-image }}
+      - name: Run tests
+        run: ./run_basic_tests.sh ${{ matrix.docker-image }}
