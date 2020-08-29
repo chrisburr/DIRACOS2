@@ -4,6 +4,7 @@ version: 2.0a1
 install_in_dependency_order: True
 
 channels:
+  - ### LOCAL_CHANNEL ###
   - diracgrid
   - conda-forge
 
@@ -16,6 +17,7 @@ specs:
   - m2crypto >=0.36
   - pyasn1 >0.4.1
   - pyasn1-modules
+  - tornado_m2crypto
   # Databases
   - cmreshandler >1.0.0b4
   - elasticsearch-dsl
@@ -50,6 +52,7 @@ specs:
   - six
   - subprocess32
   - suds-jurko >=0.6
+  - tornado
   - xmltodict
   # Testing and development
   - docutils

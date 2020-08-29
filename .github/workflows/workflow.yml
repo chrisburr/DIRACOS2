@@ -1,10 +1,15 @@
-name: Build, test and deploy!
+name: Build and test installer
 on: [push]
 
 jobs:
-  build:
-    name: Build installer
+  build-extra-packages:
+    name: Build packages
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        docker-image:
+          - tornado
+          - tornado_m2crypto
     steps:
       - uses: actions/checkout@v2
       - name: Prepare environment
@@ -12,6 +17,34 @@ jobs:
           wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh
           bash Miniforge3-Linux-x86_64.sh -b -p $HOME/miniforge
           eval "$(${HOME}/miniforge/bin/conda shell.bash hook)"
+          conda install --yes conda-build
+      - name: Create installer
+        run: |
+          eval "$(${HOME}/miniforge/bin/conda shell.bash hook)"
+          scripts/build_extra_packages.sh
+      - name: Upload extra packages channel
+        uses: actions/upload-artifact@v2
+        with:
+          name: extra-packages-channel
+          path: |
+            conda-bld/
+
+  build-installer:
+    name: Build installer
+    needs: build-extra-packages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download installer
+        uses: actions/download-artifact@v2
+        with:
+          name: extra-packages-channel
+      - name: Prepare environment
+        run: |
+          wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh
+          bash Miniforge3-Linux-x86_64.sh -b -p $HOME/miniforge
+          eval "$(${HOME}/miniforge/bin/conda shell.bash hook)"
+          sed -i "s@### LOCAL_CHANNEL ###@file:///${PWD}/conda-bld/@g" construct.yaml
           conda install --yes constructor
       - name: Create installer
         run: |
@@ -26,7 +59,7 @@ jobs:
 
   get-info:
     name: Create environment.yaml
-    needs: build
+    needs: build-installer
     runs-on: ubuntu-latest
     steps:
       - name: Download installer
@@ -35,7 +68,7 @@ jobs:
           name: installer
       - name: Generate environment.yaml
         run: |
-          bash DIRACOS-2.0a1-Linux-x86_64.sh -b -p diracos
+          bash DIRACOS-*.sh -b -p diracos
           source diracos/diracosrc
           conda env export --file environment.yaml
       - name: Upload environment.yaml
@@ -47,7 +80,7 @@ jobs:
 
   basic-tests:
     name: Basic tests
-    needs: build
+    needs: build-installer
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -62,4 +95,4 @@ jobs:
         with:
           name: installer
       - name: Run tests
-        run: ./run_basic_tests.sh ${{ matrix.docker-image }}
+        run: scripts/run_basic_tests.sh ${{ matrix.docker-image }} DIRACOS-*.sh

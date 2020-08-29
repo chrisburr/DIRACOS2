@@ -1,0 +1,39 @@
+{% set name = "tornado" %}
+{% set version = "5.1.1" %}
+
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/chaen/tornado.git
+  git_rev: iostreamConfigurable
+
+build:
+  number: 7340000
+  script: {{ PYTHON }} -m pip install . -vv
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+  host:
+    - pip
+    - python
+  run:
+    - python
+
+test:
+  imports:
+    - tornado
+    - tornado.platform
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: http://www.tornadoweb.org/
+  summary: Fork of tornado for DIRAC with a patch to allow for configurable iostream
+  license: Apache-2.0
+  license_file: LICENSE
