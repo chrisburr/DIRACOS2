@@ -35,6 +35,7 @@ specs:
   - git
   - gitpython >=2.1.0
   - matplotlib-base
+  - myproxy
   - numpy
   - openssh
   - pexpect >=4.0.1
@@ -44,6 +45,7 @@ specs:
   - python-json-logger >=0.1.8
   - pytz >=2015.7
   - requests >=2.9.1
+  - rrdtool
   - singularity
   - six
   - subprocess32
