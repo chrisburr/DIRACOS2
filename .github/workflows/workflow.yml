@@ -5,11 +5,6 @@ jobs:
   build-extra-packages:
     name: Build packages
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        docker-image:
-          - tornado
-          - tornado_m2crypto
     steps:
       - uses: actions/checkout@v2
       - name: Prepare environment
@@ -26,8 +21,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: extra-packages-channel
-          path: |
-            conda-bld/
+          path: conda-bld/
 
   build-installer:
     name: Build installer
@@ -39,6 +33,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: extra-packages-channel
+          path: conda-bld/
       - name: Prepare environment
         run: |
           wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh
@@ -54,8 +49,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: installer
-          path: |
-            DIRACOS-*.sh
+          path: DIRACOS-*.sh
 
   get-info:
     name: Create environment.yaml

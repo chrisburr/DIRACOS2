@@ -69,3 +69,5 @@ specs:
 exclude:
 
 post_install: create_diracosrc.sh
+
+ignore_duplicate_files: true
