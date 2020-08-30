@@ -1,6 +1,9 @@
 name: Build and test installer
 on:
   push:
+    # Only build for pushes to branches
+    branches:
+      - '**'
     tags-ignore:
       - '**'
 
