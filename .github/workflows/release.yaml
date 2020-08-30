@@ -7,7 +7,7 @@ on:
         description: 'Version number (optional)'
         required: false
         default: ''
-      run-id:
+      run_id:
         description: 'GitHub Actions Run ID (optional)'
         required: false
         default: ''
@@ -27,5 +27,5 @@ jobs:
           eval "$(${HOME}/miniforge/bin/conda shell.bash hook)"
           scripts/make_release.py \
             --token="${{ secrets.GITHUB_TOKEN }}" \
-            --run-id="${{ github.event.inputs.runID }}" \
+            --run-id="${{ github.event.inputs.run_id }}" \
             --version="${{ github.event.inputs.version }}"
