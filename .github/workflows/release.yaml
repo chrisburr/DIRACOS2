@@ -3,15 +3,14 @@ name: Create release
 on: 
   workflow_dispatch:
     inputs:
-      run-id:
-        description: 'The GitHub actions run ID to base the release on'
-        required: false
-        default: ''
       version:
-        description: 'The version number to create'
+        description: 'Version number (optional)'
         required: false
         default: ''
-
+      run-id:
+        description: 'GitHub Actions Run ID (optional)'
+        required: false
+        default: ''
 jobs:
   create-release:
     runs-on: ubuntu-latest
