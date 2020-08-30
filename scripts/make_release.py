@@ -221,8 +221,8 @@ if __name__ == "__main__":
     parser.add_argument("--token", required=True)
     parser.add_argument("--owner", default="chrisburr")
     parser.add_argument("--repo", default="DIRACOS2")
-    parser.add_argument("--run-id", type=int)
-    parser.add_argument("--version", type=Version)
+    parser.add_argument("--run-id")
+    parser.add_argument("--version")
     args = parser.parse_args()
 
     token = args.token
