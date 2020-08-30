@@ -83,6 +83,7 @@ jobs:
     needs: build-installer
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         docker-image:
           - "centos:6"
