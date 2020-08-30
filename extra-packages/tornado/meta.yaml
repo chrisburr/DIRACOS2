@@ -1,5 +1,7 @@
 {% set name = "tornado" %}
-{% set version = "5.1.1" %}
+# As we have forked tornado, use a local version identifier
+# https://www.python.org/dev/peps/pep-0440/#local-version-segments
+{% set version = "5.1.1+dirac.1" %}
 
 
 package:
@@ -11,7 +13,7 @@ source:
   git_rev: iostreamConfigurable
 
 build:
-  number: 7340000
+  number: 0
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:

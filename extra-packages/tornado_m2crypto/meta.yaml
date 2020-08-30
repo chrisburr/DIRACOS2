@@ -12,7 +12,7 @@ source:
 
 build:
   noarch: python
-  number: 7340000
+  number: 0
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:

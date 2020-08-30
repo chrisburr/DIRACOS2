@@ -52,7 +52,7 @@ specs:
   - six
   - subprocess32
   - suds-jurko >=0.6
-  - tornado
+  - tornado *+dirac*
   - xmltodict
   # Testing and development
   - docutils
