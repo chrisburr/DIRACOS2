@@ -178,7 +178,7 @@ def make_release(installer, environment_yaml, version, commit_hash):
     r = requests.post(
         uri_expand(
             release_data["upload_url"],
-            name=f"DIRACOS--environment.yaml",
+            name=f"DIRACOS-environment.yaml",
         ),
         data=environment_yaml,
         headers={**headers, "Content-Type": "application/x-yaml"},
@@ -203,7 +203,6 @@ def bump_version_in_master(new_version):
     r.raise_for_status()
     file_info = r.json()
     data = base64.b64decode(file_info["content"]).decode()
-    print(data)
 
     if match := CONSTRUCT_VERSION_PATTERN.search(data):
         if Version(new_version) <= Version(match.groups()[0]):
