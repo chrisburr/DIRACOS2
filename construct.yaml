@@ -72,4 +72,4 @@ post_install: create_diracosrc.sh
 
 # If there are clobber issues with duplicate files this can be used to workaround them
 # When this happens the issue should be fixed upstream in conda-forge
-ignore_duplicate_files: false
+ignore_duplicate_files: true
