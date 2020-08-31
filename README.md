@@ -2,11 +2,17 @@
 
 Experimental repository using conda constructor to build a Python 3 DIRACOS installer.
 
+## Installing DIRACOS
+
+These instructions will install the latest release, excluding pre-releases. To install a specific version replace `/latest/` in the URL with a version like `/2.0a2/`.
+
+### Quick start
+
 ```bash
-constructor . --platform=linux-64
-
-bash DIRACOS-2.0.0a1-Linux-x86_64.sh -b -p /tmp/diracos2
-
-docker run --rm --cap-add=SYS_PTRACE -v $PWD:/diracos-repo centos:8 bash -c \
-    'bash /diracos-repo/DIRACOS-2.0.0a1-Linux-x86_64.sh -b -p diracos && && source diracos/diracosrc && pytest -v /diracos-repo/tests/test_import.py && bash /diracos-repo/tests/test_cli.sh'
+curl -LO https://github.com/chrisburr/DIRACOS2/releases/latest/download/DIRACOS-Linux-x86_64.sh
+bash DIRACOS-Linux-x86_64.sh -b -p "$PWD/diracos/"
 ```
+
+## Building
+
+TODO
