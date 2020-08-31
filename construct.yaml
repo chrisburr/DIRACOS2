@@ -1,5 +1,5 @@
 name: DIRACOS
-version: 2.2a1
+version: 2.0a3
 
 install_in_dependency_order: True
 
@@ -70,4 +70,6 @@ exclude:
 
 post_install: create_diracosrc.sh
 
-ignore_duplicate_files: true
+# If there are clobber issues with duplicate files this can be used to workaround them
+# When this happens the issue should be fixed upstream in conda-forge
+ignore_duplicate_files: false

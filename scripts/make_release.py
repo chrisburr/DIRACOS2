@@ -251,6 +251,9 @@ if __name__ == "__main__":
     }
     api_root = f"https://api.github.com/repos/{args.owner}/{args.repo}"
 
+    if args.version and args.version.startswith("v"):
+        raise ValueError('For consistency versions must not start with "v"')
+
     main(
         run_id=int(args.run_id) if args.run_id else None,
         requested_version=str(Version(args.version)) if args.version else None
