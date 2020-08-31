@@ -13,6 +13,8 @@ bash DIRACOS-Linux-x86_64.sh -b -p "$PWD/diracos/"
 
 ## Building the installer
 
+**NOTE:** There is currently a hack to build the forked tornado dependencies of [](). This will likely be moved to a new repository but in the meantime, you first need to install `conda-build`, run `scripts/build_extra_packages.sh` and then patch the `construct.yaml` file using `sed -i "s@### LOCAL_CHANNEL ###@file:///${PWD}/conda-bld/@g" construct.yaml`.
+
 The DIRACOS installer is a self-extracting shell script that is generated using [conda constructor](https://github.com/conda/constructor). This can be installed using any `conda` installation. If you don't have a local conda installation, you can use the following steps on Linux:
 
 ```bash
