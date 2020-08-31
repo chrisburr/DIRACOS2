@@ -152,7 +152,7 @@ def make_release(installer, environment_yaml, version, commit_hash):
     )
     r.raise_for_status()
 
-    # Upload the installer again with a stable URL
+    # Upload the installer again with a stable filename
     r = requests.post(
         uri_expand(
             release_data["upload_url"],
@@ -174,11 +174,11 @@ def make_release(installer, environment_yaml, version, commit_hash):
     )
     r.raise_for_status()
 
-    # Upload the environment.yaml with a stable URL
+    # Upload the environment.yaml with a stable filename
     r = requests.post(
         uri_expand(
             release_data["upload_url"],
-            name=f"DIRACOS-{version}-environment.yaml",
+            name=f"DIRACOS--environment.yaml",
         ),
         data=environment_yaml,
         headers={**headers, "Content-Type": "application/x-yaml"},
