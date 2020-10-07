@@ -6,6 +6,8 @@ on:
       - '**'
     tags-ignore:
       - '**'
+  schedule:
+    - cron:  '6 2 * * *'
 
 jobs:
   build-extra-packages:
